@@ -12,14 +12,15 @@ Before starting the program, you need to:
 
 ---
 
-This chapter is explanation of what is going on in my program.
+This chapter is explanation of what is going on in my program. 
 
+0. Core logic is contained in *EtlService.cs* file.
 1. I've detected a few rows with missing fields in the provided csv file. Missing fields are saved as NULL.
 2. I use CsvHelper (NuGet package) to manipulate (extract/create) csv files.
 3. I use Microsoft.Data.SqlClient (NuGet package) to insert data into a database.
-4. I created TaxiTrip model to extract specific fields only from a csv file (see TaxiTrip.cs).
-5. In order to provide query optimisations I added indexes (see script.txt).
-6. Duplicates are detected using HashSet and saved with such name format "duplicates-yyyy-MM-dd-HH-mm-ss.csv".
+4. I created TaxiTrip model to extract specific fields only from a csv file (see *TaxiTrip.cs*).
+5. In order to provide query optimisations I added indexes (see *script.txt*).
+6. Duplicates are detected using HashSet and saved with such name format *"duplicates-yyyy-MM-dd-HH-mm-ss.csv"*.
 7. For the `store_and_fwd_flag` column, 'N' is converted to 'No' and 'Y' to 'Yes'.
 8. All text-based fields are free from leading or trailing whitespace (ensured by CsvHelper configuration).
 9. Assuming that my program will work on larger datasets (10GB CSV file), I would change it to extract, transform and insert smaller amount of records at a time (for example, 100.000 records). The program works fine with 30.000 records in provided csv file. 
