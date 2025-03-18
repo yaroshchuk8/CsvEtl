@@ -1,0 +1,31 @@
+CREATE DATABASE CsvEtl;
+GO
+
+USE CsvEtl;
+GO
+
+CREATE TABLE TaxiTrips (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    tpep_pickup_datetime DATETIME,
+    tpep_dropoff_datetime DATETIME,
+    passenger_count INT,
+    trip_distance DECIMAL(10, 2),
+    store_and_fwd_flag NVARCHAR(3),
+    PULocationID INT,
+    DOLocationID INT,
+    fare_amount DECIMAL(10, 2),
+    tip_amount DECIMAL(10, 2)
+);
+
+-- Index for highest average tip for specific location
+CREATE INDEX IDX_TaxiTrips_PULocationID_TipAmount ON TaxiTrips (PULocationID, tip_amount);
+
+-- Index for trip distance queries
+CREATE INDEX IX_TaxiTrips_TripDistance ON TaxiTrips (trip_distance DESC);
+
+-- Index for trip duration queries
+CREATE INDEX IX_TaxiTrips_TripDuration ON TaxiTrips (tpep_dropoff_datetime, tpep_pickup_datetime);
+
+-- Covering index for PULocationID searches
+CREATE INDEX IX_TaxiTrips_PULocationID_Covering ON TaxiTrips (PULocationID) 
+INCLUDE (tpep_pickup_datetime, tpep_dropoff_datetime, passenger_count, trip_distance, fare_amount, tip_amount);
