@@ -1,6 +1,8 @@
 # CsvEtl - C# Task Assessment
+## Stack: .NET 9. Program type: Console Application.
+### The goal of this task is to implement a simple ETL project in CLI that inserts data from a CSV into a single, flat table.
 
-The goal of this task is to implement a simple ETL project in CLI that inserts data from a CSV into a single, flat table.
+---
 
 ### IMPORTANT!!! 
 Before starting the program, you need to:
